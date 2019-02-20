@@ -32,7 +32,8 @@ var upload = multer({ storage: storage });
 router.post('/', upload.any(), function(req , res){
   let obj = JSON.parse(JSON.stringify(req.files).replace(/\[/g, "").replace(/\]/g, ""));
   con.FileEvaluation(obj.filename, obj.mimetype, fs.readFileSync(obj.path), function(data){
-    console.log(data);
+    let obj_report = JSON.parse(JSON.stringify(data).replace(/\s+/g, ''));
+    res.render('file', {data: obj_report});
   }, function(mistake){
     console.log(mistake);
   });

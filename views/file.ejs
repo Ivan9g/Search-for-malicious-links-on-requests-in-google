@@ -1,1 +1,35 @@
-<h1><%= data.file %></h1>
+<% include blocks/header.ejs %>
+  <div class="content _report">
+    <% include blocks/a_img.ejs %>
+    <div class="block">
+      <div class="name">
+        <span>URL-адрес:</span>
+        <span>Показатель выявления:</span>
+        <span>Дата анализа:</span>
+      </div>
+      <div class="value">
+        <span><%= data.url %></span>
+        <span><%= data.positives %>/<%= data.total %></span>
+        <span><%= data.scan_date %></span>
+      </div>
+      <div class="smail">
+        <% if(data.positives == 0) { %>
+          <img src="/public/img/yes.png" alt="clean">
+        <% } else { %>
+          <img src="/public/img/no.png" alt="no_clean">
+        <% } %>
+      </div>
+    </div>
+    <ul>
+      <% for (var key in data.scans) { %>
+        <li><%= key %>:
+        <%= data.scans[key].detected %> </li>
+      <% } %>
+    </ul>
+  </div>
+<% include blocks/footer.ejs %>
+
+<script>
+  var root = document.getElementById('page');
+  root.style.height = 'auto';
+</script>
