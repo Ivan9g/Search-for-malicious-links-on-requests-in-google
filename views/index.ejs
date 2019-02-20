@@ -1,11 +1,58 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<% include blocks/header.ejs %>
+	<div class="content">
+		<div class="logo">
+			<div class="_logo"></div>
+			<span class="teapot">для чайников</span>
+		</div>
+		<div class="text">
+			<p class="_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam asperiores laudantium sit explicabo esse nemo, tempore rem eius modi at incidunt distinctio nesciunt dolores, quam sapiente! Enim iusto beatae, amet.</p>
+		</div>
+		<div class="complicated">
+			<div class="perspective">
+
+			  <label class="tab" for="tab-top">TOP</label>
+			  <label class="tab" for="tab-front">FRONT</label>
+			  <label class="tab" for="tab-bottom">BOTTOM</label>
+			  <input type="radio" name="tabs" id="tab-top" class="in">
+			  <input type="radio" name="tabs" id="tab-front" class="in">
+			  <input type="radio" name="tabs" id="tab-bottom" class="in">
+
+			  <div class="cube">
+			    <div class="tab-content">
+						<form action="/" method="post" name="form_url" >
+							<div class="place">
+								<input class="in_text" type="text" name="url">
+								<span class="action" style="-moz-user-select: none;">
+								Введите URL
+								</span>
+							</div>
+							<input id="elem" class="button" type="submit" value="Проверить!">
+						</form>
+			    </div>
+			     <div class="tab-content">
+						 <form action="/" enctype="multipart/form-data" method="post" name="form_fail">
+						 	<div class="place">
+						 		<input class="in_text" type="file" name="file">
+						 		<span class="action" style="-moz-user-select: none;">
+						 		Выберите файл
+						 		</span>
+						 	</div>
+						 	<input class="button _2" type="submit" value="Проверить!">
+						 </form>
+			    </div>
+			    <div class="tab-content">
+						<form action="/" method="post" name="form_search">
+						 <div class="place">
+							 <input class="in_text" type="text" name="search">
+							 <span class="action" style="-moz-user-select: none;">
+							 Введите термин
+							 </span>
+						 </div>
+						 <input class="button" type="submit" value="Найти!">
+						</form>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+<% include blocks/footer.ejs %>

@@ -1,0 +1,10 @@
+<% include blocks/header.ejs %>
+  <div class="content _search">
+    <% include blocks/a_img.ejs %>
+    <h1>Коментарии по хештегу <% for(var key in data) { %>
+      #<%= data[key] %>
+    <% } %>
+    </h1>
+    <span class="coment">Нет комментариев</span>
+  </div>
+<% include blocks/footer.ejs %>
