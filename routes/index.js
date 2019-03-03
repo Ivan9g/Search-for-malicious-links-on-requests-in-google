@@ -4,7 +4,7 @@ var express = require('express'),
   vt = require('node-virustotal'),
   mkdirp = require('mkdirp'),
   multer  = require('multer'),
-  con = vt.MakePublicConnection();
+  con = vt.MakePublicConnection(),
 
 con.setKey("e2513a75f92a4169e8a47b4ab1df757f83ae45008b4a8a49903450c8402add4d");
 con.setDelay(15000);
@@ -30,13 +30,26 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 router.post('/', upload.any(), function(req , res){
-  let obj = JSON.parse(JSON.stringify(req.files).replace(/\[/g, "").replace(/\]/g, ""));
-  con.FileEvaluation(obj.filename, obj.mimetype, fs.readFileSync(obj.path), function(data){
-    let obj_report = JSON.parse(JSON.stringify(data).replace(/\s+/g, ''));
-    res.render('file', {data: obj_report});
-  }, function(mistake){
-    console.log(mistake);
-  });
+  if(req.body.url){
+    con.retrieveUrlAnalysis( req.body.url ,function(data){
+        let obj_report = JSON.parse(JSON.stringify(data).replace(/\s+/g, ''));
+        res.render('file', {data: obj_report});
+      }, function(err){
+        console.error(err);
+      });
+  }else  if (req.body.search) {
+    var str = req.body.search.split(' ');
+    res.render('search', {data: str});
+  }else{
+      let obj = JSON.parse(JSON.stringify(req.files).replace(/\[/g, "").replace(/\]/g, ""));
+      console.log(obj.filename + obj.mimetype + obj.path);
+      con.FileEvaluation(obj.filename, obj.mimetype, fs.readFileSync(obj.path), function(data){
+        let obj_report = JSON.parse(JSON.stringify(data).replace(/\s+/g, ''));
+        res.render('file', {data: obj_report});
+      }, function(mistake){
+        res.render('index');
+      });
+    }
 });
 
 module.exports = router;
