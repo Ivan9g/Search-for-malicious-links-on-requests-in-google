@@ -1,7 +1,149 @@
 <% include blocks/header.ejs %>
 
-<div class="m">
-  <%= %>
+<div class="content _second">
+  <div class="left_bar">
+    <div class="form">
+      <form action="/second" method="post" name="form_url">
+        <div class="place">
+          <input class="in_text" type="text" name="google" id="google">
+          <span class="action" style="-moz-user-select: none;">
+          Введите запрос
+          </span>
+        </div>
+        <input class="button" type="button"  id="submit" value="Проверить!">
+      </form>
+    </div>
+    <div class="views">
+      <div class="wrapper" style="display: none;" id="wrapper">
+
+
+
+  <br />
+
+  <div style="width: 500px; border: 1px solid #666; margin: 0 auto;">
+
+        <!-- Выводим проценты -->
+    <center style="color: #666; position: absolute; margin: 15px 0 0
+
+235px;" id="interest">
+      0 %
+    </center>
+
+        <!-- Выводим полосу прогресса -->
+    <img id="progress" style="width: 0; height: 50px;" src="http://sergey-
+
+oganesyan.ru/wp-content/uploads/2014/01/prograss.jpg">
+
+  </div>
+
+</div>
+      <div class="display" id="display">
+        <% var i = 0; var k = 0; %>
+        <% for ( var j=0; j<13; j++ ) { %>
+        <% var url = "url"+j; var scan = "scan"+ j; %>
+          <% if ( data[url] ) { %>
+             <div id="url<%= j %>"><%= data[url] %></div>
+           <% k++; %>
+           <% if ( data[scan].positives ) { %>
+             <% i++; %>
+             <script>
+               url<%= j %>.style.backgroundColor = '#F5A3A3';
+             </script>
+          <% }}} %>
+      </div>
+
+    </div>
+  </div>
+  <div class="right_bar">
+    <form action="/second" method="post" >
+      <input class="button" type="submit" value="Скачать музыку бесплатно!" name="dataMuz">
+    </form>
+    <form action="/second" method="post">
+      <input class="button" type="submit" value="Чит-коды!" name="dataChit">
+    </form>
+    <form action="/second" method="post">
+      <input class="button" type="submit" value="Скринсейверы!" name="dataScrin">
+    </form>
+    <form action="/second" method="post">
+      <input class="button" type="submit" value="Бесплатные игры!" name="dataFree">
+    </form>
+    <form action="/second" method="post">
+      <input class="button" type="submit" value="Работа на дому!" name="dataWork">
+    </form>
+    <form action="/second" method="post">
+      <input class="button" type="submit" value="Рианна!" name="dataRihana">
+    </form>
+    <form action="/second" method="post">
+      <input class="button" type="submit" value="Iphon!" name="dataIphon">
+    </form>
+    <form action="/second" method="post">
+      <input class="button" type="submit" value="Jonas Brothers!" name="dataJon">
+    </form>
+    <form action="/second" method="post">
+      <input class="button" type="submit" value="Сумерки!" name="dataFilm">
+    </form>
+    <form action="/second" method="post">
+      <input class="button" type="submit" value="Барак Обама!" name="dataBlack">
+    </form>
+    <form action="/second" method="post">
+      <input class="button" type="submit" value="Взломанная виндовс!" name="dataWinda">
+    </form>
+    <form action="/second" method="post">
+      <input class="button" type="submit" value="Сонник!" name="dataDreams">
+    </form>
+    <form action="/second" method="post">
+      <input class="button" type="submit" value="Зароботок в интернетте!" name="dataHaha">
+    </form>
+    <form action="/second" method="post">
+      <input class="button" type="submit" value="Виагра!" name="dataMmm">
+    </form>
+  </div>
 </div>
 
-<% include blocks/footer.ejs %>
+<form action="/second" method="post">
+  <input class="button" type="submit" value="Виагра!" name="dataword" id="submit_100" style="display: none;">
+</form>
+
+
+<script>
+  var root = document.getElementById('page');
+  root.style.height = 'auto';
+
+submit.onclick = function() {
+  wrapper.style.display = 'block';
+    display.style.display = 'none';
+  setInterval(go, 1700);
+  var val = google.value;
+  var i = 0;
+  $.post(
+  "/second",
+  {
+    google: val
+  });
+      setInterval(function(){ console.log(i++); }, 1000);
+      setTimeout(function(){
+        display.style.display = 'block';
+          $('#submit_100').trigger('click');
+ }, 170000);
+}
+
+
+
+window.interest = 0;
+
+  //Увеличиваем процент и растягиваем полосу прогресса
+function go(){
+
+      //Пока не 100% увеличиваем процент
+  if(interest != 100) {
+    interest++;
+    document.getElementById('interest').innerHTML = interest + ' %';
+    document.getElementById('progress').style.width = interest * 5 + 'px';
+  }
+  else{
+    document.getElementById('interest').innerHTML = 'Загрузка завершена';
+    document.getElementById('interest').style.margin = '15px 0 0 186px';
+      wrapper.style.display = 'none';
+  }
+}
+</script>

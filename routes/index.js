@@ -4,12 +4,12 @@ var express = require('express'),
   vt = require('node-virustotal'),
   mkdirp = require('mkdirp'),
   multer  = require('multer'),
-  con = vt.MakePublicConnection(),
+  con = vt.MakePublicConnection();
 
 con.setKey("e2513a75f92a4169e8a47b4ab1df757f83ae45008b4a8a49903450c8402add4d");
 con.setDelay(15000);
 
-/* GET home page. */
+
 router.get('/', function(req, res, next) {
   res.render('index');
 });
@@ -35,7 +35,8 @@ router.post('/', upload.any(), function(req , res){
         let obj_report = JSON.parse(JSON.stringify(data).replace(/\s+/g, ''));
         res.render('file', {data: obj_report});
       }, function(err){
-        console.error(err);
+      console.error(err);
+        res.render('index');
       });
   }else  if (req.body.search) {
     var str = req.body.search.split(' ');
@@ -47,6 +48,7 @@ router.post('/', upload.any(), function(req , res){
         let obj_report = JSON.parse(JSON.stringify(data).replace(/\s+/g, ''));
         res.render('file', {data: obj_report});
       }, function(mistake){
+        console.log(mistake);
         res.render('index');
       });
     }
